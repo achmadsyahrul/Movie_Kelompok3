@@ -1,11 +1,15 @@
 package com.example.movie.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.movie.R;
 import com.example.movie.model.movie.MovieDiscoverResultsItem;
+import com.example.movie.view.activity.DetailMovieActivity;
 
 import java.util.ArrayList;
 
@@ -21,7 +26,6 @@ public class MovieDiscoverAdapter extends RecyclerView.Adapter<MovieDiscoverAdap
 
     private ArrayList<MovieDiscoverResultsItem> movieDiscoverResultsItems = new ArrayList<>();
     private Context context;
-
     private static String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
 
     public MovieDiscoverAdapter(Context context) {
@@ -44,12 +48,35 @@ public class MovieDiscoverAdapter extends RecyclerView.Adapter<MovieDiscoverAdap
 
     @Override
     public void onBindViewHolder(@NonNull MovieDiscoverAdapter.ViewHolder holder, int position) {
-        Glide.with(context).load(BASE_IMAGE_URL+movieDiscoverResultsItems
-                .get(position)
+        final MovieDiscoverResultsItem item = movieDiscoverResultsItems.get(position);
+
+        Glide.with(context).load(BASE_IMAGE_URL + item
                 .getPosterPath())
                 .into(holder.ivThumb);
-        holder.tvTitle.setText(movieDiscoverResultsItems.get(position).getTitle());
-        holder.tvRate.setText(String.valueOf(movieDiscoverResultsItems.get(position).getVoteAverage()));
+        holder.tvTitle.setText(item.getTitle());
+        holder.tvRate.setText(String.valueOf(item.getVoteAverage()));
+
+        holder.cvItem.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(context, DetailMovieActivity.class);
+
+                MovieDiscoverResultsItem items = new MovieDiscoverResultsItem();
+                items.setId(item.getId());
+                items.setTitle(item.getTitle());
+                items.setPosterPath(BASE_IMAGE_URL + item.getPosterPath());
+                items.setOverview(item.getOverview());
+                items.setVoteAverage(item.getVoteAverage());
+                items.setBackdropPath(item.getBackdropPath());
+
+
+                intent.putExtra(DetailMovieActivity.DETAIL_MOVIE, items);
+                context.startActivity(intent);
+                Log.d("AdapterClickMovie", "MOVE INTO DETAIL ACTIVITY");
+            } catch (Exception e) {
+                Log.d("AdapterClickMovie", "GAGAL KLIK MOVIENYA");
+                Toast.makeText(context, "Gagal Menampilkan Detail", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

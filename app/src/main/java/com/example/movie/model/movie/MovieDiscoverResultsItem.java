@@ -1,9 +1,13 @@
 package com.example.movie.model.movie;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class MovieDiscoverResultsItem {
+public class MovieDiscoverResultsItem implements Parcelable {
 
     @SerializedName("overview")
     private String overview;
@@ -46,6 +50,40 @@ public class MovieDiscoverResultsItem {
 
     @SerializedName("vote_count")
     private int voteCount;
+
+    public MovieDiscoverResultsItem(){
+
+    }
+
+    protected MovieDiscoverResultsItem(Parcel in) {
+        this.overview = in.readString();
+        this.originalLanguage = in.readString();
+        this.originalTitle = in.readString();
+        this.video = in.readByte() != 0;
+        this.title = in.readString();
+        this.genreIds = new ArrayList<Integer>();
+        in.readList(this.genreIds, Integer.class.getClassLoader());
+        this.posterPath = in.readString();
+        this.backdropPath = in.readString();
+        this.releaseDate = in.readString();
+        this.voteAverage = in.readDouble();
+        this.popularity = in.readDouble();
+        this.id = in.readInt();
+        this.adult = in.readByte() != 0;
+        this.voteCount = in.readInt();
+    }
+
+    public static final Creator<MovieDiscoverResultsItem> CREATOR = new Creator<MovieDiscoverResultsItem>() {
+        @Override
+        public MovieDiscoverResultsItem createFromParcel(Parcel in) {
+            return new MovieDiscoverResultsItem(in);
+        }
+
+        @Override
+        public MovieDiscoverResultsItem[] newArray(int size) {
+            return new MovieDiscoverResultsItem[size];
+        }
+    };
 
     public void setOverview(String overview){
         this.overview = overview;
@@ -178,5 +216,28 @@ public class MovieDiscoverResultsItem {
                         ",adult = '" + adult + '\'' +
                         ",vote_count = '" + voteCount + '\'' +
                         "}";
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.overview);
+        dest.writeString(this.originalLanguage);
+        dest.writeString(this.originalTitle);
+        dest.writeByte(this.video ? (byte) 1 : (byte) 0);
+        dest.writeString(this.title);
+        dest.writeList(this.genreIds);
+        dest.writeString(this.posterPath);
+        dest.writeString(this.backdropPath);
+        dest.writeString(this.releaseDate);
+        dest.writeDouble(this.voteAverage);
+        dest.writeDouble(this.popularity);
+        dest.writeInt(this.id);
+        dest.writeByte(this.adult ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.voteCount);
     }
 }
