@@ -11,4 +11,7 @@ public interface UserDao {
 
     @Query("SELECT * from user where username=(:username) and password=(:password)")
     UserTable login(String username, String password);
+
+    @Query("UPDATE user SET name=(:name), username=(:username), password=(:password) WHERE id = :id")
+    void update(int id, String name, String username, String password);
 }

@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.movie.R;
 import com.example.movie.view.activity.LoginActivity;
+import com.example.movie.view.activity.RegisterActivity;
+import com.example.movie.view.activity.UpdateActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -86,6 +88,7 @@ public class UserFragment extends Fragment {
         tv_username.setText(username);
 
         Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
+        Button btn_edit = (Button) view.findViewById(R.id.btn_edit);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +101,14 @@ public class UserFragment extends Fragment {
 
                 Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
                 getActivity().finish();
+            }
+        });
+
+        btn_edit.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), UpdateActivity.class));
             }
         });
 

@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     Boolean check;
 
     private static final String SHARED_PREF_NAME = "mypref";
+    private static final String KEY_USER_ID = "user_id";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_NAME = "name";
@@ -74,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
                                     });
                                 }else{
                                     String name = userTable.getName();
+                                    int id = userTable.getId();
+                                    editor.putInt(KEY_USER_ID, id);
                                     editor.putString(KEY_USERNAME, username);
                                     editor.putString(KEY_PASSWORD, password);
                                     editor.putString(KEY_NAME, name);
