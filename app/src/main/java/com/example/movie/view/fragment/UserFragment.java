@@ -37,7 +37,7 @@ public class UserFragment extends Fragment {
 
     View view;
     SharedPreferences sharedPreferences;
-    String name;
+    String name, username;
 
     public UserFragment() {
         // Required empty public constructor
@@ -78,9 +78,12 @@ public class UserFragment extends Fragment {
 
         sharedPreferences = getActivity().getSharedPreferences("mypref", MODE_PRIVATE);
         name = sharedPreferences.getString("name", null);
+        username = sharedPreferences.getString("username",null);
 
         TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_name.setText(name);
+        TextView tv_username = (TextView) view.findViewById(R.id.tv_username);
+        tv_username.setText(username);
 
         Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {

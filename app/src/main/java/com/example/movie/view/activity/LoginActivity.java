@@ -11,14 +11,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.movie.R;
+import com.example.movie.database.UserDao;
+import com.example.movie.database.UserDatabase;
+import com.example.movie.database.UserTable;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText et_username, et_password;
-    Button btn_login;
+    Button btn_login, btn_register;
     SharedPreferences sharedPreferences;
-    String username, password;
-    Boolean check, reg;
+    Boolean check;
 
     private static final String SHARED_PREF_NAME = "mypref";
     private static final String KEY_USERNAME = "username";
@@ -29,16 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         check = sharedPreferences.getBoolean("logged", false);
-        reg = sharedPreferences.getBoolean("registered", false);
-
-        if(!reg){
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(KEY_USERNAME, "123180112");
-            editor.putString(KEY_PASSWORD, "123");
-            editor.putString(KEY_NAME, "Achmad Syahrul");
-            editor.putBoolean("registered", true);
-            editor.apply();
-        }
 
         if(check){
             //jika ada data ke main activity
@@ -53,28 +45,55 @@ public class LoginActivity extends AppCompatActivity {
             et_username = findViewById(R.id.et_username);
             et_password = findViewById(R.id.et_password);
             btn_login = findViewById(R.id.btn_login);
+            btn_register = findViewById(R.id.btn_toregister);
 
 
             btn_login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    username = sharedPreferences.getString(KEY_USERNAME, null);
-                    password = sharedPreferences.getString(KEY_PASSWORD, null);
-                    if(et_username.getText().toString().equals(username) && et_password.getText().toString().equals(password)) {
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("logged", true);
-                        editor.apply();
+                    final String username = et_username.getText().toString();
+                    final String password = et_password.getText().toString();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
 
-                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                        finish();
+                    if(username.isEmpty()|| password.isEmpty()){
+                        Toast.makeText(getApplicationContext(), "Fill all fields", Toast.LENGTH_SHORT).show();
+                    } else {
+                        UserDatabase userDatabase = UserDatabase.getUserDatabase(getApplicationContext());
+                        final UserDao userDao = userDatabase.userDao();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                UserTable userTable = userDao.login(username, password);
+                                if(userTable == null){
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }else{
+                                    String name = userTable.getName();
+                                    editor.putString(KEY_USERNAME, username);
+                                    editor.putString(KEY_PASSWORD, password);
+                                    editor.putString(KEY_NAME, name);
+                                    editor.putBoolean("logged", true);
+                                    editor.apply();
+                                    startActivity(new Intent(
+                                            LoginActivity.this, MainActivity.class)
+                                    );
+                                }
+                            }
+                        }).start();
                     }
-                    else{
-                        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                    }
 
+                }
+            });
+
+            btn_register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 }
             });
 
