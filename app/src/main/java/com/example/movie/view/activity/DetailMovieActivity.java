@@ -137,18 +137,18 @@ public class DetailMovieActivity extends AppCompatActivity {
         menuItem = menu;
         favoriteState();
         if (isFavorite) {
-            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_star_black_check));
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_fav_red_check));
         } else {
-            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_star_uncheck));
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_fav_uncheck));
         }
         return super.onCreateOptionsMenu(menu);
     }
 
     private void setFavorite() {
         if (isFavorite) {
-            menuItem.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_star_black_check));
+            menuItem.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_fav_red_check));
         } else {
-            menuItem.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_star_uncheck));
+            menuItem.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_fav_uncheck));
         }
     }
 

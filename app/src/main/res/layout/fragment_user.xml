@@ -1,66 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.UserFragment"
-    android:orientation="vertical"
-    android:padding="20dp">
+    tools:context=".view.fragment.UserFragment">
 
-    <ImageView
-        android:id="@+id/iv_profilPhoto"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_person"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/first_layer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello"
-        android:textSize="40dp"
-        android:fontFamily="monospace"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
+        android:orientation="vertical"
+        android:background="@drawable/layer"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:fontFamily="monospace"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:gravity="center"
-        />
+        <ImageView
+            android:id="@+id/iv_profilPhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_person_120"
+            android:layout_marginTop="60dp"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="User Name"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="username"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="25dp"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:orientation="vertical">
+        android:layout_marginVertical="50dp"
+        android:orientation="vertical"
+        android:layout_below="@id/first_layer">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_edit"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/teal_700"
+            android:background="@drawable/round_button_green"
             android:textColor="@color/white"
-            android:text="EDIT"
+            android:text="Edit"
             android:layout_gravity="center"
-            android:layout_marginVertical="5dp"/>
+            android:layout_marginTop="10dp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_logout"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#ff0000"
+            android:background="@drawable/round_button_red"
             android:textColor="@color/white"
-            android:text="LOGOUT"
-            android:layout_gravity="center"/>
+            android:text="Logout"
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            />
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

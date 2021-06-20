@@ -2,6 +2,7 @@ package com.example.movie.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class MovieDiscoverAdapter extends RecyclerView.Adapter<MovieDiscoverAdap
 
     private ArrayList<MovieDiscoverResultsItem> movieDiscoverResultsItems = new ArrayList<>();
     private Context context;
+    Cursor cursor;
     private static String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
 
     public MovieDiscoverAdapter(Context context) {
@@ -95,5 +97,10 @@ public class MovieDiscoverAdapter extends RecyclerView.Adapter<MovieDiscoverAdap
             tvTitle = itemView.findViewById(R.id.itemlist_tv_title);
             tvRate = itemView.findViewById(R.id.itemlist_tv_rate);
         }
+    }
+
+    public void setDataCursor(Cursor dataCursor) {
+        cursor = dataCursor;
+        notifyDataSetChanged();
     }
 }

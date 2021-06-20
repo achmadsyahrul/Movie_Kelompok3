@@ -9,10 +9,15 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/menu_bottomnav_user"
-        android:title="User"
-        android:icon="@drawable/ic_person"
+        android:id="@+id/menu_bottomnav_fav"
+        android:title="Favorite"
+        android:icon="@drawable/ic_fav"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/menu_bottomnav_user"
+        android:title="Profil"
+        android:icon="@drawable/ic_person"
+        app:showAsAction="ifRoom"/>
 
 </menu>

@@ -4,85 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.DetailMovieActivity">
+    tools:context=".view.activity.DetailMovieActivity"
+    android:background="#263238">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <ImageView
-            android:id="@+id/detail_activity_ivposter"
+            android:id="@+id/detail_activity_ivbackdrop"
             android:layout_width="match_parent"
             android:layout_height="192dp"
-            android:background="@drawable/background_activity"
-            android:contentDescription="Movie Poster"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_movie"
-            app:layout_constraintBottom_toTopOf="@id/detail_activity_tvtitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:contentDescription="Movie Backdrop"
+            android:src="@drawable/background_activity"
+            />
 
-        <TextView
-            android:id="@+id/detail_activity_tvtitle"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/layerposter"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Movie Name"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/detail_activity_tvrated"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_activity_ivposter" />
+            android:orientation="vertical"
+            android:layout_below="@+id/detail_activity_ivbackdrop"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-30dp"
+            android:background="@drawable/layer2"
+            >
+            <ImageView
+                android:id="@+id/detail_activity_ivposter"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:contentDescription="Movie Poster"
+                android:src="@drawable/ic_movie"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-20dp"
+                />
 
-        <TextView
-            android:id="@+id/detail_activity_tvrated"
-            android:layout_width="match_parent"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Rate : 9.0"
-            android:textSize="24sp"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/detail_activity_garis"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_activity_tvtitle" />
+            android:layout_below="@+id/layerposter"
+            android:background="@drawable/layer2"
+            android:layout_centerHorizontal="true"
+            >
+            <TextView
+                android:id="@+id/detail_activity_tvtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="Movie Name"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
 
-        <View
-            android:id="@+id/detail_activity_garis"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="#000000"
-            app:layout_constraintBottom_toTopOf="@id/detail_activity_tvoverview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_activity_tvrated" />
+            <TextView
+                android:id="@+id/detail_activity_tvrated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Rate : 9.0"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:textColor="@color/white"
+                android:layout_below="@+id/detail_activity_tvtitle"/>
 
-        <TextView
-            android:id="@+id/detail_activity_tvoverview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Overview"
-            android:textSize="24sp"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/detail_activity_tvdesc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_activity_garis" />
+            <View
+                android:id="@+id/detail_activity_garis"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="8dp"
+                android:background="@color/white"
+                android:layout_below="@+id/detail_activity_tvrated"
+                />
 
-        <TextView
-            android:id="@+id/detail_activity_tvdesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet."
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_activity_tvoverview" />
+            <TextView
+                android:id="@+id/detail_activity_tvoverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Overview"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:textColor="@color/white"
+                android:layout_below="@+id/detail_activity_garis"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/detail_activity_tvdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet."
+                android:textColor="@color/white"
+                android:layout_margin="8dp"
+                android:layout_below="@+id/detail_activity_tvoverview"/>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
 
 </ScrollView>
