@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.UserFragment">
+    tools:context=".view.fragment.UserFragment"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/iv_profilPhoto"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_person"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello"
+        android:textSize="40dp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/teal_700"
+            android:textColor="@color/white"
+            android:text="EDIT"
+            android:layout_gravity="center"
+            android:layout_marginVertical="5dp"/>
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ff0000"
+            android:textColor="@color/white"
+            android:text="LOGOUT"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+
+</LinearLayout>

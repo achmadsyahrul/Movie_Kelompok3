@@ -1,5 +1,7 @@
 package com.example.movie.view.fragment;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +9,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.movie.R;
+import com.example.movie.view.activity.LoginActivity;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +33,11 @@ public class UserFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    View view;
+    SharedPreferences sharedPreferences;
+    String name;
 
     public UserFragment() {
         // Required empty public constructor
@@ -61,6 +74,30 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        view = inflater.inflate(R.layout.fragment_user, container, false);
+
+        sharedPreferences = getActivity().getSharedPreferences("mypref", MODE_PRIVATE);
+        name = sharedPreferences.getString("name", null);
+
+        TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
+        tv_name.setText(name);
+
+        Button btn_logout = (Button) view.findViewById(R.id.btn_logout);
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("logged", false);
+                editor.apply();
+
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+
+                Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+            }
+        });
+
+        return view;
     }
 }

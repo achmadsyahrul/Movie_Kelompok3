@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -17,15 +19,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private BottomNavigationView bottomNavigationView;
     private Fragment selectedFragment = new MovieFragment();
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        sharedPreferences = getSharedPreferences("mypref", MODE_PRIVATE);
+        Boolean check = sharedPreferences.getBoolean("logged", false);
+        if(!check) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.main_bottomnav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+            bottomNavigationView = findViewById(R.id.main_bottomnav);
+            bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-        loadFragment(selectedFragment);
+            loadFragment(selectedFragment);
+        }
     }
 
     @Override
