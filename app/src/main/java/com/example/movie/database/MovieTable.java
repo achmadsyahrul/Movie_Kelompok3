@@ -24,6 +24,9 @@ public class MovieTable implements Parcelable {
     @ColumnInfo(name = "poster_path")
     private String posterPath;
 
+    @ColumnInfo(name = "backdrop_path")
+    private String backdropPath;
+
     @ColumnInfo(name = "vote_average")
     private double voteAverage;
 
@@ -63,6 +66,14 @@ public class MovieTable implements Parcelable {
         this.posterPath = posterPath;
     }
 
+    public String getBackdropPath() {
+        return backdropPath;
+    }
+
+    public void setBackdropPath(String posterPath) {
+        this.backdropPath = backdropPath;
+    }
+
     public double getVoteAverage() {
         return voteAverage;
     }
@@ -90,6 +101,7 @@ public class MovieTable implements Parcelable {
         dest.writeString(this.overview);
         dest.writeString(this.title);
         dest.writeString(this.posterPath);
+        dest.writeString(this.backdropPath);
         dest.writeDouble(this.voteAverage);
         dest.writeInt(this.id);
     }
@@ -101,6 +113,7 @@ public class MovieTable implements Parcelable {
         this.overview = in.readString();
         this.title = in.readString();
         this.posterPath = in.readString();
+        this.backdropPath = in.readString();
         this.voteAverage = in.readDouble();
         this.id = in.readInt();
     }

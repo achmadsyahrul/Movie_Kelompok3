@@ -24,7 +24,7 @@ import java.util.List;
 
 public class DetailMovieActivity extends AppCompatActivity {
 
-    ImageView ivPoster;
+    ImageView ivPoster, ivBackdrop;
     boolean isFavorite = false;
     TextView tvTitle, tvOverview, tvRated;
     private AppDatabase appDatabase;
@@ -46,6 +46,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.detail_activity_tvtitle);
         tvOverview = findViewById(R.id.detail_activity_tvdesc);
         tvRated = findViewById(R.id.detail_activity_tvrated);
+        ivBackdrop = findViewById(R.id.detail_activity_ivbackdrop);
 
         getMovie = getIntent().getParcelableExtra(DETAIL_MOVIE);
 
@@ -53,10 +54,11 @@ public class DetailMovieActivity extends AppCompatActivity {
 
 
         Glide.with(getApplicationContext()).load(getMovie.getPosterPath()).into(ivPoster);
+        Glide.with(getApplicationContext()).load(getMovie.getBackdropPath()).into(ivBackdrop);
 
         tvTitle.setText(getMovie.getTitle());
         tvOverview.setText(getMovie.getOverview());
-        tvRated.setText(getResources().getString(R.string.rating) + " : " + String.valueOf(getMovie.getVoteAverage()));
+        tvRated.setText(getResources().getString(R.string.rating) + " : " + String.valueOf(getMovie.getVoteAverage()) + " / 10");
         appDatabase = AppDatabase.initDatabase(getApplicationContext());
         favoriteState();
 
@@ -92,6 +94,7 @@ public class DetailMovieActivity extends AppCompatActivity {
             movieTable.setId(getMovie.getId());
             movieTable.setTitle(getMovie.getTitle());
             movieTable.setPosterPath(getMovie.getPosterPath());
+            movieTable.setBackdropPath(getMovie.getBackdropPath());
             movieTable.setOverview(getMovie.getOverview());
             movieTable.setVoteAverage(getMovie.getVoteAverage());
             movieTable.setCategory("movie");
@@ -115,6 +118,7 @@ public class DetailMovieActivity extends AppCompatActivity {
             movieTable.setId(getMovie.getId());
             movieTable.setTitle(getMovie.getTitle());
             movieTable.setPosterPath(getMovie.getPosterPath());
+            movieTable.setBackdropPath(getMovie.getBackdropPath());
             movieTable.setOverview(getMovie.getOverview());
             movieTable.setVoteAverage(getMovie.getVoteAverage());
             movieTable.setCategory("movie");

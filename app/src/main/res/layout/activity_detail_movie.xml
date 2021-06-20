@@ -27,7 +27,7 @@
             android:orientation="vertical"
             android:layout_below="@+id/detail_activity_ivbackdrop"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="-30dp"
+            android:layout_marginTop="-50dp"
             android:background="@drawable/layer2"
             >
             <ImageView
@@ -37,7 +37,6 @@
                 android:contentDescription="Movie Poster"
                 android:src="@drawable/ic_movie"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="-20dp"
                 />
 
         </RelativeLayout>

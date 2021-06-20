@@ -68,7 +68,7 @@ public class MovieDiscoverAdapter extends RecyclerView.Adapter<MovieDiscoverAdap
                 items.setPosterPath(BASE_IMAGE_URL + item.getPosterPath());
                 items.setOverview(item.getOverview());
                 items.setVoteAverage(item.getVoteAverage());
-                items.setBackdropPath(item.getBackdropPath());
+                items.setBackdropPath(BASE_IMAGE_URL + item.getBackdropPath());
 
 
                 intent.putExtra(DetailMovieActivity.DETAIL_MOVIE, items);

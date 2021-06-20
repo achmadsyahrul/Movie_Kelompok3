@@ -27,6 +27,8 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
     private ArrayList<MovieTable> movieItems = new ArrayList<>();
     private Context context;
 
+    private static String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w185/";
+
     public FavoriteMovieAdapter(Context context) {
         this.context = context;
     }
@@ -61,9 +63,10 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
                     MovieDiscoverResultsItem items = new MovieDiscoverResultsItem();
                     items.setId(item.getId());
                     items.setTitle(item.getTitle());
-                    items.setPosterPath(item.getPosterPath());
+                    items.setPosterPath(BASE_IMAGE_URL + item.getPosterPath());
                     items.setOverview(item.getOverview());
                     items.setVoteAverage(item.getVoteAverage());
+                    items.setBackdropPath(BASE_IMAGE_URL + item.getBackdropPath());
 
                     intent.putExtra(DetailMovieActivity.DETAIL_MOVIE, items);
                     context.startActivity(intent);
